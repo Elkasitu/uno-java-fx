@@ -14,14 +14,14 @@ package esi.atl.g41163.uno.model;
 public class Card
 {
     private final Color color;
-    private final Value value;
+    private final int value;
     
     /**
      * Constructor for the Card class
      * @param color Color of the card (Color enum)
-     * @param value Value of the card (Value enum)
+     * @param value Integer representing the value of the card
      */
-    public Card(Color color, Value value)
+    Card(Color color, int value)
     {
         this.color = color;
         this.value = value;
@@ -40,7 +40,7 @@ public class Card
      * Gets the value of the card object
      * @return Value value of the card
      */
-    public Value getValue()
+    public int getValue()
     {
         return this.value;
     }
@@ -56,7 +56,7 @@ public class Card
         
         buf.append(this.color.getStrRepr());
         buf.append(" ");
-        buf.append(this.value.getStrRepr());
+        buf.append(String.valueOf(this.value));
         
         return buf.toString();
     }

@@ -13,21 +13,23 @@ package esi.atl.g41163.uno.model;
  */
 public enum Color
 {
-    NONE(""),
-    BLUE("Blue"),
-    RED("Red"),
-    YELLOW("Yellow"),
-    GREEN("Green");
+    BLUE("Blue", 'B'),
+    RED("Red", 'R'),
+    YELLOW("Yellow", 'Y'),
+    GREEN("Green", 'G');
     
     private final String repr;
+    private final char conOut;
     
     /**
      * Constructor for the Color enum
      * @param repr A string representation of the color
+     * @param conOut A character representing the console output representation
      */
-    Color(String repr)
+    Color(String repr, char conOut)
     {
         this.repr = repr;
+        this.conOut = conOut;
     }
     
     /**
@@ -37,5 +39,14 @@ public enum Color
     public String getStrRepr()
     {
         return this.repr;
+    }
+    
+    /**
+     * Gets the console output character representing the color
+     * @return A char representing the console output that represents the color
+     */
+    public char getConOut()
+    {
+        return this.conOut;
     }
 }

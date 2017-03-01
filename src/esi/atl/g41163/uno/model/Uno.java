@@ -34,9 +34,18 @@ public class Uno
     {
         for (Color color : Color.values())
         {
-            for (Value value : Value.values())
+            for (int i = 0; i < 10; i++)
             {
-                this.deck.add(new Card(color, value));
+                if (i == 0)
+                {
+                    this.deck.add(new Card(color, i));
+                }
+                else
+                {
+                    this.deck.add(new Card(color, i));
+                    this.deck.add(new Card(color, i));
+                }
+                
             }
         }
     }
