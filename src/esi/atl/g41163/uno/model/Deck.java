@@ -49,6 +49,8 @@ public class Deck extends CardCollection
                 }
             }
         }
+        
+        shuffle();
     }
     
     /**
@@ -61,7 +63,7 @@ public class Deck extends CardCollection
     }
     
     /**
-     * Shuffles the Deck object (usually done after a "refill" only)
+     * Shuffles the Deck object (usually done after refill() or generateDeck())
      */
     private void shuffle()
     {
@@ -79,6 +81,9 @@ public class Deck extends CardCollection
         {
             this.addCard(stack.getCard());
         }
+        
+        // Clear the stack
+        stack.flush();
         
         // Shuffle the deck otherwise we'll get a perfect chain of cards
         shuffle();

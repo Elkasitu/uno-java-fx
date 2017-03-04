@@ -24,10 +24,18 @@ public class Discarded extends CardCollection
     
     /**
      * Gets the card at the top of the Discarded stack
-     * @return The card object at position 0
+     * @return The card object at the last position
      */
     Card getCard()
     {
-        return getCard(0);
+        return this.cardList.get(this.cardList.size() - 1);
+    }
+    
+    void flush()
+    {
+        for (Card card : this.cardList)
+        {
+            this.cardList.remove(card);
+        }
     }
 }

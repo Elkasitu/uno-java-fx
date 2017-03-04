@@ -75,4 +75,13 @@ public class Player
         return this.hand.getCard(i);
     }
     
+    /**
+     * Gets a boolean representing if the player has finished playing
+     * @return True if the player has finished playing, false otherwise
+     */
+    boolean isDone()
+    {
+        return this.hand.isEmpty();
+    }
+    
 }
