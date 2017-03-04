@@ -60,37 +60,4 @@ public class Player
         return this.name;
     }
     
-    /**
-     * Adds the passed-in card to the player's hand
-     * @param card Card to be added to the player's hand
-     */
-    public void drawCard(Card card)
-    {
-        this.hand.add(card);
-    }
-    
-    /**
-     * Gets the card i (from left to right) from the player's hand
-     * @param i Index of the card in the player's hand
-     * @return The card object at position i in the player's hand ArrayList
-     */
-    public Card getCard(int i)
-    {
-        Card card = this.hand.get(i);
-        this.hand.remove(card);
-        return card;
-    }
-    
-    /**
-     * If the player "yells" uno and he has only one card in his hand, set hasUno
-     * to true (required for winning)
-     * @return True if player has uno, false otherwise
-     */
-    public boolean yellUno()
-    {
-        if (this.hand.size() == 1)
-            this.hasUno = true;
-        
-        return this.hasUno;
-    }
 }
