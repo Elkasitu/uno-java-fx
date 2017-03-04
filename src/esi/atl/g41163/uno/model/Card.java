@@ -5,6 +5,8 @@
  */
 package esi.atl.g41163.uno.model;
 
+import java.util.Objects;
+
 /**
  * This class represents a Card in the game of UNO
  * @author Adrian Torres
@@ -59,5 +61,53 @@ public class Card
         buf.append(String.valueOf(this.value));
         
         return buf.toString();
+    }
+
+    /**
+     * Creates a identifier for this object based on its attributes
+     * @return An integer that represents this object
+     */
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.color);
+        hash = 67 * hash + this.value;
+        return hash;
+    }
+
+    /**
+     * Checks if Object obj is equal to this instance of Card
+     * @param obj The object to check
+     * @return True if both objects are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        if (obj == null)
+        {
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        final Card other = (Card) obj;
+        if (this.value != other.value)
+        {
+            return false;
+        }
+        if (this.color == other.color)
+        {
+        }
+        else
+        {
+            return false;
+        }
+        return true;
     }
 }

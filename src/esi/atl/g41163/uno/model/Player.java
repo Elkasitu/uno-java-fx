@@ -5,8 +5,6 @@
  */
 package esi.atl.g41163.uno.model;
 
-import java.util.ArrayList;
-
 
 /**
  * This class represents a Player in the game of UNO
@@ -16,10 +14,8 @@ import java.util.ArrayList;
  */
 public class Player
 {
-    private final ArrayList<Card> hand;
     private final String name;
     private int score;
-    private boolean hasUno;
     
     /**
      * Constructor for the Player class
@@ -29,8 +25,6 @@ public class Player
     {
         this.name = name;
         this.score = 0;
-        this.hand = new ArrayList();
-        this.hasUno = false;
     }
     
     /**
