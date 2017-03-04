@@ -12,7 +12,7 @@ package esi.atl.g41163.uno.model;
  * @version 1.0
  * @since 2017-03-04
  */
-public class Hand
+public class Hand extends CardCollection
 {
     /**
      * This constructor calls CardCollection's constructor to instantiate itself
@@ -20,5 +20,27 @@ public class Hand
     Hand()
     {
         super();
+    }
+    
+    /**
+     * Gets a string representing the Hand contents
+     * @return A string representing the hand contents
+     */
+    @Override
+    public String toString()
+    {
+        StringBuilder buf = new StringBuilder();
+        
+        for (Card card : this.cardList)
+        {
+            int i = this.cardList.indexOf(card);
+            
+            buf.append(String.valueOf(i));
+            buf.append(". ");
+            buf.append(card.toString());
+            buf.append("\n");
+        }
+        
+        return buf.toString();
     }
 }

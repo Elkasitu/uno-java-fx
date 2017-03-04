@@ -16,22 +16,24 @@ public class Player
 {
     private final String name;
     private int score;
+    private final Hand hand;
     
     /**
      * Constructor for the Player class
      * @param name Name of the player
      */
-    public Player(String name)
+    Player(String name)
     {
         this.name = name;
         this.score = 0;
+        this.hand = new Hand();
     }
     
     /**
      * Adds n to the Player's score
      * @param n Amount to be added to the player's score
      */
-    public void addScore(int n)
+    void addScore(int n)
     {
         this.score += n;
     }
@@ -52,6 +54,25 @@ public class Player
     public String getName()
     {
         return this.name;
+    }
+    
+    /**
+     * Adds a card to the player's hand
+     * @param card The Card object to be added
+     */
+    void drawCard(Card card)
+    {
+        this.hand.addCard(card);
+    }
+    
+    /**
+     * Plays a card and removes it from the player's hand
+     * @param i Index of the card in the hand
+     * @return The Card object to be played
+     */
+    Card playCard(int i)
+    {
+        return this.hand.getCard(i);
     }
     
 }
