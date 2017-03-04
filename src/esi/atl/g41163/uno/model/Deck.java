@@ -52,14 +52,12 @@ public class Deck extends CardCollection
     }
     
     /**
-     * Gets the card at the top of the deck (index 0)
-     * @return The Card object and removes it from the collection
+     * Gets the card at the top of the deck
+     * @return The card object at position 0
      */
     Card getCard()
     {
-        Card card = this.cardList.get(0);
-        removeCard(card);
-        return card;
+        return getCard(0);
     }
     
     /**
@@ -71,6 +69,18 @@ public class Deck extends CardCollection
         Collections.shuffle(cardList, new Random(seed));
     }
     
-    //TODO: Complete after building the Stack class
-    void refill(){}
+    /**
+     * Refills the deck with the given stack of discarded cards
+     * @param stack A Discarded object
+     */
+    void refill(Discarded stack)
+    {
+        for (int i = 0; i < stack.getCount(); i++)
+        {
+            this.addCard(stack.getCard());
+        }
+        
+        // Shuffle the deck otherwise we'll get a perfect chain of cards
+        shuffle();
+    }
 }

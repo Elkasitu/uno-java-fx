@@ -63,4 +63,15 @@ public abstract class CardCollection
         this.cardList.remove(card);
     }
     
+    /**
+     * Gets the card at index i
+     * @return The Card object and removes it from the collection
+     * @param i Index of the card to be fetched
+     */
+    protected Card getCard(int i)
+    {
+        Card card = this.cardList.get(i);
+        removeCard(card);
+        return card;
+    }
 }
