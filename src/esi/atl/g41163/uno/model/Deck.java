@@ -10,16 +10,24 @@ import java.util.Collections;
 import java.util.Random;
 
 /**
- *
+ * An abstract class that represents a Deck of UNO cards
  * @author Adrian Torres
+ * @version 1.0
+ * @since 2017-03-04
  */
 public class Deck extends CardCollection
 {
+    /**
+     * This class' constructor calls to its superclass' constructor
+     */
     Deck()
     {
         super();
     }
     
+    /**
+     * Generates all 76 cards found in a standard UNO deck
+     */
     void generateDeck()
     {
         int k;
