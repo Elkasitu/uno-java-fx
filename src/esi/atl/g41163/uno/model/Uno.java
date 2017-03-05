@@ -7,6 +7,7 @@ package esi.atl.g41163.uno.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import static esi.atl.g41163.uno.view.View.displayHand;
 
 /**
  * Facade class that controls the game at a higher level
@@ -42,8 +43,7 @@ public class Uno
         myGame.addPlayer("Player 1");
         myGame.addPlayer("Player 2");
         myGame.start();
-        myGame.drawCard();
-        System.out.println(myGame.getCpHand().toString());
+        displayHand(myGame.getCpHand());
     }
     
     private void nextPlayer()
@@ -60,7 +60,7 @@ public class Uno
         
         for (Player player : players)
         {
-            sum += player.getScore();
+            sum += player.getHand().getCount();
         }
         
         return sum;
