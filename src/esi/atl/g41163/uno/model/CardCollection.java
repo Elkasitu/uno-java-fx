@@ -70,8 +70,18 @@ public abstract class CardCollection
      */
     protected Card getCard(int i)
     {
-        Card card = this.cardList.get(i);
-        removeCard(card);
+        Card card;
+        try
+        {
+            card = this.cardList.get(i);
+            removeCard(card);
+        }
+        catch (Exception e)
+        {
+            // This works as a "skip turn"
+            card = null;
+        }
+        
         return card;
     }
     

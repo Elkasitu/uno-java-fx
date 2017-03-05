@@ -193,11 +193,11 @@ public class Main
             
             String name = scanner.nextLine();
             
-            while (names.contains(name))
+            while (names.contains(name) || name.length() < 1)
             {
                 System.out.println("A player with that name already exists! Please choose a different name!");
                 System.out.print(PROMPT);
-                name = scanner.next();
+                name = scanner.nextLine();
             }
             
             names.add(name);

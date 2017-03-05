@@ -71,7 +71,8 @@ public class Player
      */
     void drawCard(Card card)
     {
-        this.hand.addCard(card);
+        if (card != null)
+            this.hand.addCard(card);
     }
     
     /**
