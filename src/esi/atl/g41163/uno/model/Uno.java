@@ -36,9 +36,14 @@ public class Uno
         this.currentPlayer = null;
     }
     
-    public static void main(String[] args)
+    public static void main(String[] args) throws UnoIllegalException
     {
         Uno myGame = new Uno();
+        myGame.addPlayer("Player 1");
+        myGame.addPlayer("Player 2");
+        myGame.start();
+        myGame.drawCard();
+        System.out.println(myGame.getCpHand().toString());
     }
     
     private void nextPlayer()
@@ -162,6 +167,15 @@ public class Uno
     public Player getCurrentPlayer()
     {
         return this.currentPlayer;
+    }
+    
+    /**
+     * Gets a copy of the current player's hand
+     * @return A new Hand object containing the same cards as the currentPlayer's hand
+     */
+    public Hand getCpHand()
+    {
+        return new Hand(this.currentPlayer.getHand());
     }
     
     /**

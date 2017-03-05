@@ -29,6 +29,11 @@ public class Player
         this.hand = new Hand();
     }
     
+    Hand getHand()
+    {
+        return this.hand;
+    }
+    
     /**
      * Adds n to the Player's score
      * @param n Amount to be added to the player's score

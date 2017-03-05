@@ -6,6 +6,8 @@
 
 package esi.atl.g41163.uno.model;
 
+import java.util.List;
+
 /**
  * A class representing the player's hand
  * @author Adrian Torres
@@ -22,6 +24,17 @@ public class Hand extends CardCollection
         super();
     }
     
+    Hand(Hand hand)
+    {
+        super();
+        this.cardList = hand.cardList;
+    }
+    
+    public List<Card> getList()
+    {
+        return this.cardList;
+    }
+    
     /**
      * Gets a string representing the Hand contents
      * @return A string representing the hand contents
@@ -35,7 +48,7 @@ public class Hand extends CardCollection
         {
             int i = this.cardList.indexOf(card);
             
-            buf.append(String.valueOf(i));
+            buf.append(String.valueOf(i + 1));
             buf.append(". ");
             buf.append(card.toString());
             buf.append("\n");

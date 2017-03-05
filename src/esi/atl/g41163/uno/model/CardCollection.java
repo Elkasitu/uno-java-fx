@@ -17,7 +17,7 @@ import java.util.List;
  */
 public abstract class CardCollection
 {
-    protected final List<Card> cardList;
+    protected List<Card> cardList;
     
     /**
      * Constructor for the abstract class, instantiates the list of cards
