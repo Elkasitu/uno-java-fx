@@ -5,9 +5,10 @@
  */
 package esi.atl.g41163.uno.model;
 
+import static esi.atl.g41163.uno.view.Display.displayCard;
 import java.util.ArrayList;
 import java.util.List;
-import static esi.atl.g41163.uno.view.View.displayHand;
+import static esi.atl.g41163.uno.view.Display.displayHand;
 
 /**
  * Facade class that controls the game at a higher level
@@ -42,16 +43,22 @@ public class Uno
         Uno myGame = new Uno();
         myGame.addPlayer("Player 1");
         myGame.addPlayer("Player 2");
+
         myGame.start();
+        myGame.drawCard();
+        displayCard(myGame.getFlippedCard());
+        displayHand(myGame.getCpHand());
+        myGame.nextTurn();
+        displayCard(myGame.getFlippedCard());
         displayHand(myGame.getCpHand());
     }
     
     private void nextPlayer()
     {
-    int cpIndex = players.indexOf(getCurrentPlayer());
-    // We wrap around the list if we reach the end when fetching the next
-    int nextInd = (cpIndex + 1) % players.size();
-    this.currentPlayer = players.get(nextInd);
+        int cpIndex = players.indexOf(getCurrentPlayer());
+        // We wrap around the list if we reach the end when fetching the next
+        int nextInd = (cpIndex + 1) % players.size();
+        this.currentPlayer = players.get(nextInd);
     }
     
     private int sumScore()
@@ -129,7 +136,7 @@ public class Uno
             nextPlayer();
         }
         
-        nextPlayer();
+        //nextPlayer();
         // We draw one extra card for the discarded stack
         this.stack.addCard(this.deck.getCard());
     }
@@ -189,7 +196,6 @@ public class Uno
         if (isLegal(playedCard))
         {
             stack.addCard(playedCard);
-            nextPlayer();
         }
         else
         {
@@ -214,8 +220,7 @@ public class Uno
      */
     public void drawCard()
     {
-        getCurrentPlayer().drawCard(this.deck.getCard());
-        nextPlayer();
+        this.currentPlayer.drawCard(this.deck.getCard());
     }
     
 }

@@ -15,13 +15,34 @@ import java.util.List;
  * @version 1.0
  * @since 2017-03-05
  */
-public class View
+public class Display
 {
+    public static void displayCard(Card card)
+    {
+        String value = String.valueOf(card.getValue());
+        char color = card.getColor().getConOut();
+        String data = " #   " + value + color + "   # \n";
+        
+        StringBuilder output = new StringBuilder();
+        
+        output.append("Stack: \n");
+        output.append("  ########  \n");
+        output.append(" #        # \n");
+        output.append(" #        # \n");
+        output.append(data);
+        output.append(" #        # \n");
+        output.append(" #        # \n");
+        output.append("  ########  \n");
+        
+        System.out.println(output.toString());
+    }
     
     public static void displayHand(Hand hand)
     {
         StringBuilder buf = new StringBuilder();
         List<Card> list = hand.getList();
+        
+        buf.append("Your hand: \n");
         
         String[] pieces = {
             "  ########  ",

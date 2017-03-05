@@ -29,6 +29,10 @@ public class Player
         this.hand = new Hand();
     }
     
+    /**
+     * Gets the hand of the player
+     * @return A Hand object representing the player's hand
+     */
     Hand getHand()
     {
         return this.hand;
