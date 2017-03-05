@@ -10,9 +10,9 @@ package esi.atl.g41163.uno.model;
  *
  * @author Adrian Torres
  */
-public class UnoIllegalPlayException extends Exception
+public class UnoIllegalException extends Exception
 {
-    public UnoIllegalPlayException(String msg)
+    public UnoIllegalException(String msg)
     {
         super(msg);
     }
