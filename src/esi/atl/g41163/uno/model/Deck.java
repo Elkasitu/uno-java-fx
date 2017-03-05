@@ -84,6 +84,7 @@ public class Deck extends CardCollection
         
         // Clear the stack
         stack.flush();
+        stack.addCard(this.getCard());
         
         // Shuffle the deck otherwise we'll get a perfect chain of cards
         shuffle();

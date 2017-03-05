@@ -17,12 +17,21 @@ import java.util.List;
  */
 public class Display
 {
+    /**
+     * Displays both the card at the top of the discard stack and the hand of the current player
+     * @param card Card at the top of the discard stack
+     * @param hand Hand of the current player
+     */
     public static void displayBoard(Card card, Hand hand)
     {
         displayCard(card);
         displayHand(hand);
     }
     
+    /**
+     * Displays the card at the top of the discard stack
+     * @param card Card at the top of the discard stack
+     */
     public static void displayCard(Card card)
     {
         String value = String.valueOf(card.getValue());
@@ -43,6 +52,10 @@ public class Display
         System.out.println(output.toString());
     }
     
+    /**
+     * Displays the hand of the current player
+     * @param hand Hand of the current player
+     */
     public static void displayHand(Hand hand)
     {
         StringBuilder buf = new StringBuilder();
@@ -65,6 +78,7 @@ public class Display
             
             for (Card card : list)
             {
+                // 3 is the middle of the card, that's where the card information will go
                 if (i == 3)
                 {
                     String value = String.valueOf(card.getValue());

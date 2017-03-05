@@ -16,14 +16,20 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
+ * Main class of the Uno application
  * @author Adrian Torres
+ * @version 1.0
+ * @since 2017-03-05
  */
 public class Main
 {
     
-    public static final String PROMPT = ">>> ";
+    private static final String PROMPT = ">>> ";
     
+    /**
+     * Main class
+     * @param args Command line arguments (not used) 
+     */
     public static void main(String[] args)
     {
         Uno game = init();
@@ -37,8 +43,10 @@ public class Main
         Player matchWinner;
         Player gameWinner;
         
+        // The game will run until any player's score reaches 100
         while (game.anyScoreOver() == null)
         {
+            // The game object gets restarted after every match
             game.reset();
             game.start();
             matchWinner = matchCycle(game);
@@ -48,6 +56,7 @@ public class Main
         
         gameWinner = game.anyScoreOver();
         
+        // Announcing the game winner
         System.out.println("Player " + gameWinner.getName() + " has won the game! Total Score: " + gameWinner.getScore());
     }
     
@@ -56,17 +65,22 @@ public class Main
         int cardToPlay;
         boolean played;
         
+        // The match will run until the gameState flag gets changed to OVER
         while (game.getGameState() == GameState.RUNNING)
         {
             played = false;
             
+            // Display the state of the match
             displayBoard(game.getFlippedCard(), game.getCpHand());
             System.out.println("It's player " + game.getCurrentPlayer().getName() + "'s turn!");
             
+            // played flag is for input validation
             while (!played)
             {
+                // Player input handling
                 cardToPlay = getCardId(game.getCpHand().getList().size());
 
+                // -1 is the drawCard flag
                 if (cardToPlay == -1)
                 {
                     game.drawCard();
@@ -74,6 +88,7 @@ public class Main
                 }
                 else
                 {
+                    // If the card can't be played, then it's an illegal play
                     try
                     {
                         game.playCard(cardToPlay);
@@ -89,6 +104,7 @@ public class Main
             game.nextTurn();
         }
         
+        // Returns the winner of the match
         return game.getCurrentPlayer();
     }
     
@@ -100,7 +116,8 @@ public class Main
         
         System.out.println("Choose a card by index (0 to draw)");
         System.out.print(PROMPT);
-            
+        
+        // Input validation
         do
         {
             try
@@ -117,6 +134,7 @@ public class Main
             
         } while (true);
         
+        // More input validation
         if (n < 0 || n > size)
         {
             return getCardId(size);  
@@ -135,6 +153,8 @@ public class Main
         
         System.out.println("Please input the amount of players");
         System.out.print(PROMPT);
+        
+        // Input validation
         do
         {
             try
@@ -159,6 +179,7 @@ public class Main
         List<String> names = new ArrayList();
         int n = askForAmt();
         
+        // Input validation
         while (n < 1 || n > 10)
         {
             System.out.println("You must choose a number between 1 and 10!");
@@ -187,6 +208,7 @@ public class Main
     
     private static Uno init()
     {
+        // Initializes the game variables and players
         System.out.println("Welcome to the game of UNO!");
         List<String> names = askForNames();
         

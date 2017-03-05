@@ -5,10 +5,8 @@
  */
 package esi.atl.g41163.uno.model;
 
-import static esi.atl.g41163.uno.view.Display.displayCard;
 import java.util.ArrayList;
 import java.util.List;
-import static esi.atl.g41163.uno.view.Display.displayHand;
 
 /**
  * Facade class that controls the game at a higher level
@@ -37,6 +35,11 @@ public class Uno
         this.currentPlayer = null;
     }
     
+    /**
+     * Tests this facade's methods
+     * @param args command-line arguments (not used
+     * @throws UnoIllegalException If an illegal play/action is done
+     */
     public static void main(String[] args) throws UnoIllegalException
     {
         Uno myGame = new Uno();
@@ -45,11 +48,7 @@ public class Uno
 
         myGame.start();
         myGame.drawCard();
-        displayCard(myGame.getFlippedCard());
-        displayHand(myGame.getCpHand());
         myGame.nextTurn();
-        displayCard(myGame.getFlippedCard());
-        displayHand(myGame.getCpHand());
     }
     
     private void nextPlayer()
@@ -64,6 +63,8 @@ public class Uno
     {
         int sum = 0;
         
+        // When a player wins a match, its score gets increased by the sum of
+        // all of the player's remaining cards
         for (Player player : players)
         {
             sum += player.getHand().getCount();
@@ -74,6 +75,7 @@ public class Uno
     
     private boolean isLegal(Card card)
     {
+        // Can card be played?
         Card topCard = getFlippedCard();
         
         return card.equals(topCard) || card.getColor() == topCard.getColor() || card.getValue() == topCard.getValue();
@@ -81,10 +83,11 @@ public class Uno
     
     private void checkAndRefill()
     {
+        // Checking if the deck is empty and refilling it with the discard stack
+        // if needed (except the top card)
         if (this.deck.isEmpty() && getGameState() != GameState.OVER)
         {
             this.deck.refill(this.stack);
-            this.stack.addCard(this.deck.getCard());
         }
     }
     
@@ -117,6 +120,10 @@ public class Uno
         }
     }
     
+    /**
+     * Gets the player that has a score at or over 100 or null if none does
+     * @return The Player object with a score of 100+
+     */
     public Player anyScoreOver()
     {
         for (Player player : players)
@@ -138,7 +145,8 @@ public class Uno
         this.gameState = GameState.RUNNING;
         this.deck.generateDeck();
         this.currentPlayer = players.get(0);
-        // We give each player a starting set of 7 cards
+        
+        // Give each player a starting set of 7 cards
         for (int i = 0; i < players.size(); i++)
         {
             for (int j = 0; j < 7; j++)
@@ -149,19 +157,21 @@ public class Uno
             nextPlayer();
         }
         
-        //nextPlayer();
-        // We draw one extra card for the discarded stack
+        // Draw one extra card for the discarded stack
         this.stack.addCard(this.deck.getCard());
     }
     
+    /**
+     * Resets the gameState, deck, stack as well as each player's hand
+     */
     public void reset()
     {
         this.gameState = GameState.INIT;
         
-        for (Player player : players)
+        players.forEach((player) ->
         {
             player.flushHand();
-        }
+        });
         
         this.deck.flush();
         this.stack.flush();

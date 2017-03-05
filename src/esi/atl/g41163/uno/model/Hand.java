@@ -24,12 +24,20 @@ public class Hand extends CardCollection
         super();
     }
     
+    /**
+     * Copy constructor for the Hand class
+     * @param hand Hand object to be copied
+     */
     Hand(Hand hand)
     {
         super();
         this.cardList = hand.cardList;
     }
     
+    /**
+     * Gets the ArrayList object
+     * @return ArrayList object containing this hand's cards
+     */
     public List<Card> getList()
     {
         return this.cardList;

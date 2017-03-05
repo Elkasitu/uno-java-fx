@@ -93,6 +93,9 @@ public class Player
         return this.hand.isEmpty();
     }
     
+    /**
+     * Clears this player's hand
+     */
     void flushHand()
     {
         this.hand.flush();

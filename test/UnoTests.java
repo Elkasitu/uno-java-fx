@@ -12,7 +12,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import esi.atl.g41163.uno.model.*;
-import esi.atl.g41163.uno.view.*;
 import java.util.List;
 
 /**
