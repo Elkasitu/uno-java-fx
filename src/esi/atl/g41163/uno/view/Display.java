@@ -17,6 +17,12 @@ import java.util.List;
  */
 public class Display
 {
+    public static void displayBoard(Card card, Hand hand)
+    {
+        displayCard(card);
+        displayHand(hand);
+    }
+    
     public static void displayCard(Card card)
     {
         String value = String.valueOf(card.getValue());

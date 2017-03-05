@@ -74,4 +74,12 @@ public abstract class CardCollection
         removeCard(card);
         return card;
     }
+    
+    /**
+     * Clears the cardList List
+     */
+    protected void flush()
+    {
+        this.cardList = new ArrayList();
+    }
 }

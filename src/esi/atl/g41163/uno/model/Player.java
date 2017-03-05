@@ -93,4 +93,9 @@ public class Player
         return this.hand.isEmpty();
     }
     
+    void flushHand()
+    {
+        this.hand.flush();
+    }
+    
 }

@@ -30,15 +30,4 @@ public class Discarded extends CardCollection
     {
         return this.cardList.get(this.cardList.size() - 1);
     }
-    
-    /**
-     * Clears the discarded stack
-     */
-    void flush()
-    {
-        for (Card card : this.cardList)
-        {
-            this.cardList.remove(card);
-        }
-    }
 }

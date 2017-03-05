@@ -32,7 +32,6 @@ public class Uno
     {
         this.gameState = GameState.INIT;
         this.deck = new Deck();
-        this.deck.generateDeck();
         this.stack = new Discarded();
         this.players = new ArrayList();
         this.currentPlayer = null;
@@ -118,12 +117,26 @@ public class Uno
         }
     }
     
+    public Player anyScoreOver()
+    {
+        for (Player player : players)
+        {
+            if (player.getScore() >= 100)
+            {
+                return player;
+            }
+        }
+        
+        return null;
+    }
+    
     /**
      * Starts the game by changing the gameState and handing every player 7 cards
      */
     public void start()
     {
         this.gameState = GameState.RUNNING;
+        this.deck.generateDeck();
         this.currentPlayer = players.get(0);
         // We give each player a starting set of 7 cards
         for (int i = 0; i < players.size(); i++)
@@ -139,6 +152,19 @@ public class Uno
         //nextPlayer();
         // We draw one extra card for the discarded stack
         this.stack.addCard(this.deck.getCard());
+    }
+    
+    public void reset()
+    {
+        this.gameState = GameState.INIT;
+        
+        for (Player player : players)
+        {
+            player.flushHand();
+        }
+        
+        this.deck.flush();
+        this.stack.flush();
     }
     
     /**
@@ -222,5 +248,4 @@ public class Uno
     {
         this.currentPlayer.drawCard(this.deck.getCard());
     }
-    
 }
