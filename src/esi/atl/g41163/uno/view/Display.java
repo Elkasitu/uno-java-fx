@@ -60,6 +60,8 @@ public class Display
     {
         StringBuilder buf = new StringBuilder();
         List<Card> list = hand.getList();
+        String value;
+        char color;
         
         buf.append("Your hand: \n");
         
@@ -67,6 +69,7 @@ public class Display
             "  ########  ",
             " #        # ",
             " #        # ",
+            " #   %s%s   # ",
             " #        # ",
             " #        # ",
             "  ########  "
@@ -78,28 +81,21 @@ public class Display
             
             for (Card card : list)
             {
-                // 3 is the middle of the card, that's where the card information will go
+                // 3 is the middle of the card, that's where the card information will
                 if (i == 3)
                 {
-                    String value = String.valueOf(card.getValue());
-                    char color = card.getColor().getConOut();
-                    String data = " #   " + value + color + "   # ";
-                    buf.append(data);
+                    value = String.valueOf(card.getValue());
+                    color = card.getColor().getConOut();
                     
-                    if (list.indexOf(card) == list.size() - 1)
-                    {
-                        buf.append("\n");
-                        
-                        list.forEach((_item) ->
-                        {
-                            buf.append(str);
-                        });
-                    }
+                    String fStr = String.format(str, value, color);
+                    
+                    buf.append(fStr);
                 }
                 else
                 {
                     buf.append(str);
                 }
+
             }
             
             buf.append("\n");
