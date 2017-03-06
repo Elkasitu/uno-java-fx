@@ -209,4 +209,25 @@ public class UnoTests
         
         assertEquals(playedCard, game.getFlippedCard());
     }
+    
+    @Test
+    public void aiConstructTest()
+    {
+        AI ai = new AI("CPU001");
+        
+        assertTrue(ai.isAI());
+    }
+    
+    @Test
+    public void aiPlayTest()
+    {
+        Uno game = new Uno();
+        game.addAI("Test");
+        game.start();
+        game.playAI();
+        
+        int size = game.getCpHand().getList().size();
+        
+        assertTrue(size == 6 || size == 8);
+    }
 }

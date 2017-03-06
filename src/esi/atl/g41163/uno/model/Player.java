@@ -18,6 +18,8 @@ public class Player
     private int score;
     private final Hand hand;
     
+    protected boolean ai;
+    
     /**
      * Constructor for the Player class
      * @param name Name of the player
@@ -27,6 +29,7 @@ public class Player
         this.name = name;
         this.score = 0;
         this.hand = new Hand();
+        this.ai = false;
     }
     
     /**
@@ -100,6 +103,15 @@ public class Player
     void flushHand()
     {
         this.hand.flush();
+    }
+    
+    /**
+     * Tells if the player is an AI or not
+     * @return True if the player is an AI, false otherwise
+     */
+    public boolean isAI()
+    {
+        return this.ai;
     }
     
 }

@@ -90,7 +90,7 @@ public class Uno
         // Can card be played?
         Card topCard = getFlippedCard();
         
-        return card.equals(topCard) || card.getColor() == topCard.getColor() || card.getValue() == topCard.getValue();
+        return card.getColor() == topCard.getColor() || card.getValue() == topCard.getValue();
     }
     
     private void checkAndRefill()
@@ -269,5 +269,30 @@ public class Uno
     public void drawCard()
     {
         this.currentPlayer.drawCard(this.deck.getCard());
+    }
+    
+    /**
+     * Adds an AI player to the game
+     * @param name Name of the AI player
+     */
+    public void addAI(String name)
+    {
+        this.players.add(new AI(name));
+    }
+    
+    /**
+     * Gets called if the currentPlayer is an AI
+     */
+    public void playAI()
+    {
+        AI ai = (AI) this.getCurrentPlayer();
+        Card card = ai.playCard(this.getFlippedCard());
+        stack.addCard(card);
+        ai.getHand().getList().remove(card);
+        
+        if (card == null)
+        {
+            drawCard();
+        }
     }
 }

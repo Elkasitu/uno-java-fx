@@ -6,6 +6,7 @@
 
 package esi.atl.g41163.uno.view;
 
+import esi.atl.g41163.uno.model.AI;
 import esi.atl.g41163.uno.model.GameState;
 import esi.atl.g41163.uno.model.Player;
 import esi.atl.g41163.uno.model.Uno;
@@ -65,40 +66,54 @@ public class Main
     {
         int cardToPlay;
         boolean played;
+        Player cPlayer;
         
         // The match will run until the gameState flag gets changed to OVER
         while (game.getGameState() == GameState.RUNNING)
         {
             played = false;
+            cPlayer = game.getCurrentPlayer();
             
             // Display the state of the match
-            displayBoard(game.getFlippedCard(), game.getCpHand());
-            System.out.println("It's player " + game.getCurrentPlayer().getName() + "'s turn!");
+            if (!cPlayer.isAI())
+            {
+                displayBoard(game.getFlippedCard(), game.getCpHand());
+                System.out.println("It's player " + cPlayer.getName() + "'s turn!");
+            }
             
             // played flag is for input validation
             while (!played)
             {
-                // Player input handling
-                cardToPlay = getCardId(game.getCpHand().getList().size());
-
-                // -1 is the drawCard flag
-                if (cardToPlay == -1)
+                if (!cPlayer.isAI())
                 {
-                    game.drawCard();
-                    played = true;
+                    // Player input handling
+                    cardToPlay = getCardId(game.getCpHand().getList().size());
+
+                    // -1 is the drawCard flag
+                    if (cardToPlay == -1)
+                    {
+                        game.drawCard();
+                        played = true;
+                    }
+                    else
+                    {
+                        // If the card can't be played, then it's an illegal play
+                        try
+                        {
+                            game.playCard(cardToPlay);
+                            played = true;
+                        }
+                        catch (UnoIllegalException e)
+                        {
+                            System.out.println(e.getMessage());
+                        }
+                    }
                 }
                 else
                 {
-                    // If the card can't be played, then it's an illegal play
-                    try
-                    {
-                        game.playCard(cardToPlay);
-                        played = true;
-                    }
-                    catch (UnoIllegalException e)
-                    {
-                        System.out.println(e.getMessage());
-                    }
+                    // Player is an AI
+                    game.playAI();
+                    played = true;
                 }
             }
             
@@ -148,13 +163,13 @@ public class Main
         
     }
     
-    private static int askForAmt()
+    private static int askForAmt(String playerType, int max)
     {
         Scanner scanner;
         scanner = new Scanner(System.in, "UTF-8");
         int amt;
         
-        System.out.println("Please input the amount of players");
+        System.out.println("Please input the amount of " + playerType);
         System.out.print(PROMPT);
         
         // Input validation
@@ -168,7 +183,7 @@ public class Main
             }
             catch (NumberFormatException e)
             {
-                System.out.println("You must choose a number between 1 and 10!");
+                System.out.println("You must choose a number between 1 and " + String.valueOf(max) + "!");
                 System.out.print(PROMPT);
             }
         } while (true);
@@ -176,18 +191,28 @@ public class Main
         return amt;
     }
     
+    private static int askForAmtAI()
+    {
+        return askForAmt("AI", 9);
+    }
+    
+    private static int askForAmtHuman()
+    {
+        return askForAmt("players", 10);
+    }
+    
     private static List<String> askForNames()
     {
         Scanner scanner;
         scanner = new Scanner(System.in, "UTF-8");
         List<String> names = new ArrayList();
-        int n = askForAmt();
+        int n = askForAmtHuman();
         
         // Input validation
         while (n < 1 || n > 10)
         {
             System.out.println("You must choose a number between 1 and 10!");
-            n = askForAmt();
+            n = askForAmtHuman();
         }
         
         for (int i = 0; i < n; i++)
@@ -220,7 +245,21 @@ public class Main
         
         if (names.size() == 1)
         {
+            try
+            {
+                game.addPlayer(names.get(0));
+            }
+            catch (UnoIllegalException e)
+            {
+                System.out.println(Arrays.toString(e.getStackTrace()));
+            }
+            
             //TODO: Add AI Player
+            int aiAmt = askForAmtAI();
+            for (int i = 0; i < aiAmt; i++)
+            {
+                game.addAI("CPU" + String.valueOf((i + 1)));
+            }
         }
         else
         {
