@@ -112,6 +112,7 @@ public class Main
                 else
                 {
                     // Player is an AI
+                    System.out.println(game.getCpHand().toString());
                     game.playAI();
                     played = true;
                 }
@@ -193,12 +194,28 @@ public class Main
     
     private static int askForAmtAI()
     {
-        return askForAmt("AI", 9);
+        int n = askForAmt("AI", 9);
+        
+        while (n < 1 || n > 9)
+        {
+            System.out.println("You must choose a number between 1 and 9!");
+            n = askForAmt("AI", 9);
+        }
+        
+        return n;
     }
     
     private static int askForAmtHuman()
     {
-        return askForAmt("players", 10);
+        int n = askForAmt("players", 10);
+        
+        while (n < 1 || n > 10)
+        {
+            System.out.println("You must choose a number between 1 and 10!");
+            n = askForAmt("players", 10);
+        }
+        
+        return n;
     }
     
     private static List<String> askForNames()
@@ -209,12 +226,6 @@ public class Main
         int n = askForAmtHuman();
         
         // Input validation
-        while (n < 1 || n > 10)
-        {
-            System.out.println("You must choose a number between 1 and 10!");
-            n = askForAmtHuman();
-        }
-        
         for (int i = 0; i < n; i++)
         {
             System.out.println("Input Player " + (i + 1) + " name");

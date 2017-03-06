@@ -287,12 +287,15 @@ public class Uno
     {
         AI ai = (AI) this.getCurrentPlayer();
         Card card = ai.playCard(this.getFlippedCard());
-        stack.addCard(card);
-        ai.getHand().getList().remove(card);
         
         if (card == null)
         {
             drawCard();
+        }
+        else
+        {
+            stack.addCard(card);
+            ai.getHand().getList().remove(card);
         }
     }
 }
