@@ -42,11 +42,23 @@ public class Uno
      */
     public static void main(String[] args) throws UnoIllegalException
     {
+        // Init
         Uno myGame = new Uno();
         myGame.addPlayer("Player 1");
         myGame.addPlayer("Player 2");
 
         myGame.start();
+        // Running
+        try
+        {
+            myGame.playCard(0);
+        }
+        catch(UnoIllegalException e)
+        {
+            myGame.drawCard();
+        }
+        myGame.nextTurn();
+        
         myGame.drawCard();
         myGame.nextTurn();
     }
