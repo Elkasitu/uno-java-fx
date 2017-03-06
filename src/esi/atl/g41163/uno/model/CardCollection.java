@@ -17,6 +17,9 @@ import java.util.List;
  */
 public abstract class CardCollection
 {
+    /**
+     * List where the cards will be stored
+     */
     protected List<Card> cardList;
     
     /**

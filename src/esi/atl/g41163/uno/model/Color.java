@@ -13,6 +13,7 @@ package esi.atl.g41163.uno.model;
  */
 public enum Color
 {
+    
     BLUE("Blue", 'B'),
     RED("Red", 'R'),
     YELLOW("Yellow", 'Y'),

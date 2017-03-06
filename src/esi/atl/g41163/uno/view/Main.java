@@ -12,6 +12,7 @@ import esi.atl.g41163.uno.model.Uno;
 import esi.atl.g41163.uno.model.UnoIllegalException;
 import static esi.atl.g41163.uno.view.Display.displayBoard;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -110,7 +111,8 @@ public class Main
     
     private static int getCardId(int size)
     {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner;
+        scanner = new Scanner(System.in, "UTF-8");
         String errMsg = "You must insert a number between 1 and " + String.valueOf(size);
         int n;
         
@@ -148,7 +150,8 @@ public class Main
     
     private static int askForAmt()
     {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner;
+        scanner = new Scanner(System.in, "UTF-8");
         int amt;
         
         System.out.println("Please input the amount of players");
@@ -175,7 +178,8 @@ public class Main
     
     private static List<String> askForNames()
     {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner;
+        scanner = new Scanner(System.in, "UTF-8");
         List<String> names = new ArrayList();
         int n = askForAmt();
         
@@ -226,7 +230,10 @@ public class Main
                 {
                     game.addPlayer(name);
                 }
-                catch (UnoIllegalException e){}
+                catch (UnoIllegalException e)
+                {
+                    System.out.println(Arrays.toString(e.getStackTrace()));
+                }
             }
         }
         
